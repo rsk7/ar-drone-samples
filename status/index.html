@@ -1,0 +1,9 @@
+<!doctype html>
+<html>
+
+<script src="/dronestatus/nodecopter-client.js"></script>
+<script>
+	new NodecopterStatus().on('change', function (message) {
+		console.log(JSON.parse(message.data));
+	});
+</script>

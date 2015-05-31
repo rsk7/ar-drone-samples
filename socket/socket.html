@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    <script>
+      var socket = io.connect();
+      socket.on("date", function(data) {
+      	document.getElementById("date").innerHTML = data.date;
+      });
+
+      	document.addEventListener("keydown", function(e) {
+      		socket.emit("keydown", {"key" : String.fromCharCode(e.which)});
+      	});
+
+      	document.addEventListener("keyup", function(e) {
+      		socket.emit("keyup", {"key" : String.fromCharCode(e.which)});
+      	});
+
+      	window.submit = function() {
+      		console.log("submit");
+      		var sequence = document.getElementById("sequence").value;
+      		socket.emit("sequence", {"sequence": sequence});
+      	};
+
+    </script>
+    <div id="date">This is our socket.html file</div>
+    <textarea id="text" style="margin: 30px; width: 600px; height: 300px"></textarea>
+    <textarea id="sequence" style="margin: 30px; width: 600px; height: 300px"></textarea>
+    <button id="submitSequence" style="margin: 30px;" onclick="submit()">Submit</button>
+  </body>
+</html>
